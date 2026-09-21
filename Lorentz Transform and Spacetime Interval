@@ -1,0 +1,53 @@
+## Lorentz Transform
+
+import sympy as sp
+
+
+from sympy import Matrix
+
+
+#put v as a portion of lightspeed
+v = 0.5
+gamma = 1/sp.sqrt(1-v**2)
+beta = v*gamma
+
+#Initial 4-Vectors(i.e. the Basis Vectors)
+vt_1 = Matrix([1, 0, 0, 0])
+vx_1 = Matrix([0, 1, 0, 0])
+vy_1 = Matrix([0, 0, 1, 0])
+vz_1 = Matrix([0, 0, 0, 1])
+
+#Metric Tensor
+gmn = Matrix([[1, 0, 0, 0], [0, -1, 0, 0],
+              [0, 0, -1, 0], [0, 0, 0, -1]])
+
+#spacetime interval, ds^2=dt^2-dx^2
+ds_time = vt_1.T * gmn * vt_1
+print("Spacetime Interval(Time basis vector):")
+display(ds_time)
+ds_space = vx_1.T * gmn * vx_1
+print("Spacetime Interval(Space basis vector)")
+display(ds_space)
+
+#Lorentz matrix and Lorentz Transform
+
+
+Lorentz_matrix = Matrix([[gamma, beta, 0, 0], 
+                [beta, gamma, 0, 0], 
+                 [0, 0, 1, 0], 
+                  [0, 0, 0, 1]])
+vt_2 = Lorentz_matrix * vt_1
+print("New Time Vector:")
+display(vt_2)
+vx_2 = Lorentz_matrix * vx_1
+print("New Space Vector:")
+display(vx_2)
+
+ds_tnew = vt_2.T * gmn * vt_2
+print("New Spacetime Interval(time basis vector and space basis vector)")
+display(ds_tnew)
+ds_xnew = vx_2.T*gmn*vx_2
+display(ds_xnew)
+
+
+
